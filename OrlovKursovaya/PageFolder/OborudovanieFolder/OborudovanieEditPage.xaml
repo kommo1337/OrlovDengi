@@ -1,0 +1,78 @@
+﻿<Page x:Class="OrlovKursovaya.PageFolder.OborudovanieFolder.OborudovanieEditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:OrlovKursovaya.PageFolder.OborudovanieFolder"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+       MinHeight="500" MinWidth="500"
+      MaxHeight="500" MaxWidth="500"
+      Title="Редактирование оборудоавния"
+      >
+    <Border BorderBrush="{x:Null}" BorderThickness="1" CornerRadius="20"
+                  >
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="35" Direction="-90"
+                              RenderingBias="Quality" ShadowDepth="4"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="25"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="NameTb" Grid.Row="2" Grid.Column="1"
+                     materialDesign:HintAssist.Hint="Название"
+                     Text="{Binding OborudovanieName}"/>
+
+
+
+            <TextBox x:Name="CountTb" Grid.Row="4" Grid.Column="1"
+                     materialDesign:HintAssist.Hint="Кол-во"
+                     Text="{Binding OborudovanieCount}"
+                      />
+            <ComboBox x:Name="TypeCb" Grid.Row="2" Grid.Column="2"
+                     materialDesign:HintAssist.Hint="Тип"
+                      ItemsSource="{Binding type}" DisplayMemberPath="TypeName"
+                  SelectedValuePath="Id"
+                  SelectedValue="{Binding Path=Id}"
+                      
+                      />
+
+            <TextBox x:Name="PriceTb" Grid.Row="4" Grid.Column="2"
+                     materialDesign:HintAssist.Hint="Сумма"
+                     Text="{Binding Price}"
+                      />
+            <TextBox x:Name="DescpirtionTb" Grid.Row="6" Grid.Column="1"
+                     materialDesign:HintAssist.Hint="Описание"
+                     Text="{Binding OborudovanieDescription}"
+                      />
+
+            <StackPanel Grid.Row="8" Grid.Column="0"
+                        Grid.ColumnSpan="3" Margin="0,37,0,0"
+                        >
+                <Button x:Name="AuthBtn"
+                        Content="Редактироавать"
+                        Height="40"
+                        Width="400"
+                        Click="AddBtn_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Page>
