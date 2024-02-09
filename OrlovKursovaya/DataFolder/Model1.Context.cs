@@ -15,10 +15,7 @@ namespace OrlovKursovaya.DataFolder
     
     public partial class DBEntities : DbContext
     {
-        public DBEntities()
-            : base("name=DBEntities")
-        {
-        }
+
         private static DBEntities context;
 
         public static DBEntities GetContext()
@@ -30,6 +27,12 @@ namespace OrlovKursovaya.DataFolder
             return context;
         }
 
+
+        public DBEntities()
+            : base("name=DBEntities")
+        {
+        }
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

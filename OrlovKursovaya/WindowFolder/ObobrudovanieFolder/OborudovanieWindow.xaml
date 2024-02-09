@@ -47,14 +47,14 @@
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/ResourceFolder/ImageFolder/list.png"
                                    Width="20"/>
-                                <TextBlock Text="Список оборудования" Style="{DynamicResource ButtonTextBlock}"/>
+                                <TextBlock Text="Список операций" Style="{DynamicResource ButtonTextBlock}"/>
                             </StackPanel>
                         </Button>
                         <Button x:Name="AddBookBtn" Width="260" Click="AddBookBtn_Click_1" >
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/ResourceFolder/ImageFolder/add.png"
                                    Width="20"/>
-                                <TextBlock Text="Добавить оборудование" Style="{DynamicResource ButtonTextBlock}"/>
+                                <TextBlock Text="Добавить операций" Style="{DynamicResource ButtonTextBlock}"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>

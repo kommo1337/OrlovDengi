@@ -4,181 +4,180 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище DBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Client">
-          <Key>
-            <PropertyRef Name="ClientId" />
-          </Key>
-          <Property Name="ClientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FIO" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ClientPassport" Type="int" Nullable="false" />
-          <Property Name="ClientAdress" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ClientDateOfBirth" Type="date" Nullable="false" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="RemontId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="EmployeeId" />
-          </Key>
-          <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FIO" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DateOfBirth" Type="date" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Passport" Type="int" Nullable="false" />
-          <Property Name="Adress" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Oborudovanie">
-          <Key>
-            <PropertyRef Name="OborudovanieId" />
-          </Key>
-          <Property Name="OborudovanieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="OborudovanieName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="OborudovanieCount" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="OborudovanieDescription" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="TypeId" Type="int" Nullable="false" />
-          <Property Name="Price" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Remont">
-          <Key>
-            <PropertyRef Name="RemontId" />
-          </Key>
-          <Property Name="RemontId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RemontDate" Type="date" Nullable="false" />
-          <Property Name="RemontPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="OborudovanieId" Type="int" Nullable="false" />
-          <Property Name="EmployeeId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
-        <EntityType Name="Type">
-          <Key>
-            <PropertyRef Name="TypeId" />
-          </Key>
-          <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="UserPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="RoleId" Type="int" Nullable="false" />
-          <Property Name="FIO" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_Client_Remont">
-          <End Role="Remont" Type="Self.Remont" Multiplicity="1" />
-          <End Role="Client" Type="Self.Client" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Remont">
-              <PropertyRef Name="RemontId" />
-            </Principal>
-            <Dependent Role="Client">
-              <PropertyRef Name="RemontId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Oborudovanie_Type">
-          <End Role="Type" Type="Self.Type" Multiplicity="1" />
-          <End Role="Oborudovanie" Type="Self.Oborudovanie" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Type">
-              <PropertyRef Name="TypeId" />
-            </Principal>
-            <Dependent Role="Oborudovanie">
-              <PropertyRef Name="TypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Remont_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Remont" Type="Self.Remont" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeId" />
-            </Principal>
-            <Dependent Role="Remont">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Remont_Oborudovanie">
-          <End Role="Oborudovanie" Type="Self.Oborudovanie" Multiplicity="1" />
-          <End Role="Remont" Type="Self.Remont" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Oborudovanie">
-              <PropertyRef Name="OborudovanieId" />
-            </Principal>
-            <Dependent Role="Remont">
-              <PropertyRef Name="OborudovanieId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="RoleId" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="Хранилище DBModelContainer">
-          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Oborudovanie" EntityType="Self.Oborudovanie" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Remont" EntityType="Self.Remont" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Client_Remont" Association="Self.FK_Client_Remont">
-            <End Role="Remont" EntitySet="Remont" />
-            <End Role="Client" EntitySet="Client" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Oborudovanie_Type" Association="Self.FK_Oborudovanie_Type">
-            <End Role="Type" EntitySet="Type" />
-            <End Role="Oborudovanie" EntitySet="Oborudovanie" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Remont_Employee" Association="Self.FK_Remont_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Remont" EntitySet="Remont" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Remont_Oborudovanie" Association="Self.FK_Remont_Oborudovanie">
-            <End Role="Oborudovanie" EntitySet="Oborudovanie" />
-            <End Role="Remont" EntitySet="Remont" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="DBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DBModelStoreContainer">
+    <EntitySet Name="Client" EntityType="DBModel.Store.Client" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employee" EntityType="DBModel.Store.Employee" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Oborudovanie" EntityType="DBModel.Store.Oborudovanie" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Remont" EntityType="DBModel.Store.Remont" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Role" EntityType="DBModel.Store.Role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="DBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Type" EntityType="DBModel.Store.Type" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User" EntityType="DBModel.Store.User" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Client_Remont" Association="DBModel.Store.FK_Client_Remont">
+      <End Role="Remont" EntitySet="Remont" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Remont_Employee" Association="DBModel.Store.FK_Remont_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Remont" EntitySet="Remont" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Oborudovanie_Type" Association="DBModel.Store.FK_Oborudovanie_Type">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="Oborudovanie" EntitySet="Oborudovanie" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Remont_Oborudovanie" Association="DBModel.Store.FK_Remont_Oborudovanie">
+      <End Role="Oborudovanie" EntitySet="Oborudovanie" />
+      <End Role="Remont" EntitySet="Remont" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="DBModel.Store.FK_User_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ClientId" />
+    </Key>
+    <Property Name="ClientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FIO" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="ClientPassport" Type="int" Nullable="false" />
+    <Property Name="ClientAdress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClientDateOfBirth" Type="datetime" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="RemontId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FIO" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Passport" Type="int" Nullable="false" />
+    <Property Name="Adress" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Oborudovanie">
+    <Key>
+      <PropertyRef Name="OborudovanieId" />
+    </Key>
+    <Property Name="OborudovanieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OborudovanieName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="OborudovanieCount" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="OborudovanieDescription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TypeId" Type="int" Nullable="false" />
+    <Property Name="Price" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Remont">
+    <Key>
+      <PropertyRef Name="RemontId" />
+    </Key>
+    <Property Name="RemontId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RemontDate" Type="datetime" Nullable="false" />
+    <Property Name="RemontPrice" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="OborudovanieId" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" Nullable="true" />
+    <Property Name="definition" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="TypeId" />
+    </Key>
+    <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="UserPassword" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="FIO" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Client_Remont">
+    <End Role="Remont" Type="DBModel.Store.Remont" Multiplicity="1" />
+    <End Role="Client" Type="DBModel.Store.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Remont">
+        <PropertyRef Name="RemontId" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="RemontId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Remont_Employee">
+    <End Role="Employee" Type="DBModel.Store.Employee" Multiplicity="1" />
+    <End Role="Remont" Type="DBModel.Store.Remont" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Remont">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Oborudovanie_Type">
+    <End Role="Type" Type="DBModel.Store.Type" Multiplicity="1" />
+    <End Role="Oborudovanie" Type="DBModel.Store.Oborudovanie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="TypeId" />
+      </Principal>
+      <Dependent Role="Oborudovanie">
+        <PropertyRef Name="TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Remont_Oborudovanie">
+    <End Role="Oborudovanie" Type="DBModel.Store.Oborudovanie" Multiplicity="1" />
+    <End Role="Remont" Type="DBModel.Store.Remont" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Oborudovanie">
+        <PropertyRef Name="OborudovanieId" />
+      </Principal>
+      <Dependent Role="Remont">
+        <PropertyRef Name="OborudovanieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Role" Type="DBModel.Store.Role" Multiplicity="1" />
+    <End Role="User" Type="DBModel.Store.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -368,101 +367,100 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище DBModelContainer" CdmEntityContainer="DBEntities">
-          <EntitySetMapping Name="Client">
-            <EntityTypeMapping TypeName="DBModel.Client">
-              <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="FIO" ColumnName="FIO" />
-                <ScalarProperty Name="ClientPassport" ColumnName="ClientPassport" />
-                <ScalarProperty Name="ClientAdress" ColumnName="ClientAdress" />
-                <ScalarProperty Name="ClientDateOfBirth" ColumnName="ClientDateOfBirth" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="RemontId" ColumnName="RemontId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employee">
-            <EntityTypeMapping TypeName="DBModel.Employee">
-              <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="FIO" ColumnName="FIO" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Passport" ColumnName="Passport" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Oborudovanie">
-            <EntityTypeMapping TypeName="DBModel.Oborudovanie">
-              <MappingFragment StoreEntitySet="Oborudovanie">
-                <ScalarProperty Name="OborudovanieId" ColumnName="OborudovanieId" />
-                <ScalarProperty Name="OborudovanieName" ColumnName="OborudovanieName" />
-                <ScalarProperty Name="OborudovanieCount" ColumnName="OborudovanieCount" />
-                <ScalarProperty Name="OborudovanieDescription" ColumnName="OborudovanieDescription" />
-                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Remont">
-            <EntityTypeMapping TypeName="DBModel.Remont">
-              <MappingFragment StoreEntitySet="Remont">
-                <ScalarProperty Name="RemontId" ColumnName="RemontId" />
-                <ScalarProperty Name="RemontDate" ColumnName="RemontDate" />
-                <ScalarProperty Name="RemontPrice" ColumnName="RemontPrice" />
-                <ScalarProperty Name="OborudovanieId" ColumnName="OborudovanieId" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="DBModel.Role">
-              <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="DBModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Type">
-            <EntityTypeMapping TypeName="DBModel.Type">
-              <MappingFragment StoreEntitySet="Type">
-                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="DBModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="FIO" ColumnName="FIO" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="DBEntities">
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.Client)">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+          <ScalarProperty Name="ClientPassport" ColumnName="ClientPassport" />
+          <ScalarProperty Name="ClientAdress" ColumnName="ClientAdress" />
+          <ScalarProperty Name="ClientDateOfBirth" ColumnName="ClientDateOfBirth" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="RemontId" ColumnName="RemontId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.Employee)">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Passport" ColumnName="Passport" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Oborudovanie">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.Oborudovanie)">
+        <MappingFragment StoreEntitySet="Oborudovanie">
+          <ScalarProperty Name="OborudovanieId" ColumnName="OborudovanieId" />
+          <ScalarProperty Name="OborudovanieName" ColumnName="OborudovanieName" />
+          <ScalarProperty Name="OborudovanieCount" ColumnName="OborudovanieCount" />
+          <ScalarProperty Name="OborudovanieDescription" ColumnName="OborudovanieDescription" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Remont">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.Remont)">
+        <MappingFragment StoreEntitySet="Remont">
+          <ScalarProperty Name="RemontId" ColumnName="RemontId" />
+          <ScalarProperty Name="RemontDate" ColumnName="RemontDate" />
+          <ScalarProperty Name="RemontPrice" ColumnName="RemontPrice" />
+          <ScalarProperty Name="OborudovanieId" ColumnName="OborudovanieId" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.Role)">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.sysdiagrams)">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Type">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.Type)">
+        <MappingFragment StoreEntitySet="Type">
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.User)">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -476,7 +474,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
       </DesignerInfoPropertySet>
     </Options>
